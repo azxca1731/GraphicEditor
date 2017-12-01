@@ -1,2 +1,2 @@
 # GraphicEditor
-This is teamproject for DDingJJI
+띵지머 고객 그림판
