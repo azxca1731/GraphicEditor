@@ -1,5 +1,6 @@
 package frames;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
@@ -31,6 +32,7 @@ public class GeDrawingPanel extends JPanel {
 	private MouseDrawingHandler drawingHandler;
 	private Color fillColor, lineColor;	
 	private GECursorManager cursorManager;
+	private BasicStroke basicStroke;
 	
 	public GeDrawingPanel() {	
 		super();
@@ -42,6 +44,7 @@ public class GeDrawingPanel extends JPanel {
 		fillColor = GeConstants.DEFAULT_FILL_COLOR;
 		lineColor = GeConstants.DEFAULT_LINE_COLOR;
 		cursorManager = new GECursorManager();
+		basicStroke=new BasicStroke(GeConstants.DEFAULT_LINE_WIDTH);
 		this.addMouseListener(drawingHandler);
 		this.addMouseMotionListener(drawingHandler);
 		this.setBackground(GeConstants.BACKGROUND_COLOR);
@@ -54,7 +57,17 @@ public class GeDrawingPanel extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2d= (Graphics2D)g;
 		for(GEShape shape : shapeList) {
+			g2d.setStroke(shape.getBasicStroke());
 			shape.draw(g2d);
+		}
+	}
+	
+	public void setStroke(BasicStroke basicStroke){
+		if(selectedShape != null) {
+			selectedShape.setBasicStroke(basicStroke);;
+			repaint();
+		}else {
+			this.basicStroke=basicStroke;
 		}
 	}
 	
@@ -84,6 +97,7 @@ public class GeDrawingPanel extends JPanel {
 		currentShape=currentShape.clone();
 		currentShape.setFillColor(fillColor);
 		currentShape.setLineColor(lineColor);
+		currentShape.setBasicStroke(basicStroke);
 	}
 
 	private void continueDrawing(Point currentP) {

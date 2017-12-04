@@ -50,5 +50,7 @@ public class GeConstants {
 	public static final int DEFAULT_DASHEDLINE_WIDTH = 1;
 	//GEMenuLine
 	public static enum ELineMenuItems {Solid, Dotted, Round, Edge, Bold, Fine}
-	
+	public static final int DEFAULT_LINE_WIDTH = 1;
+	public static final int DEFAULT_BOLDLINE_WIDTH = 2;
+	public static final float DEFAULT_FINELINE_WIDTH = 0.5f;
 }

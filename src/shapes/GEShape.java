@@ -1,5 +1,6 @@
 package shapes;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -19,6 +20,7 @@ public abstract class GEShape {
 	protected EAnchorTypes selectedAnchor;
 	protected Color lineColor, fillColor;
 	protected AffineTransform affineTransform;
+	protected BasicStroke basicStroke;
 	
 	public GEShape(Shape shape) {
 		this.myShape = shape;
@@ -92,7 +94,12 @@ public abstract class GEShape {
 	public void setLineColor(Color lineColor) {
 		this.lineColor = lineColor;
 	}
-	
+	public void setBasicStroke(BasicStroke basicStroke) {
+		this.basicStroke = basicStroke;
+	}
+	public BasicStroke getBasicStroke() {
+		return basicStroke;
+	}
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 		if(selected == true) {
