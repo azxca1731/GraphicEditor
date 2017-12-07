@@ -154,16 +154,17 @@ public class GeDrawingPanel extends JPanel {
 				shapeList.remove(shape);
 			}
 		}
-			repaint();
+		undoManager.push(shapeList);
+		repaint();
 	}
 	public void ShapeCut() {
 		clipboard.cut(shapeList);
+		undoManager.push(shapeList);
 		repaint();
 	}
 	
 	public void ShapeCopy() {
 		clipboard.copy(shapeList);
-		undoManager.push(shapeList);
 	}
 	
 	public void ShapePaste() {
