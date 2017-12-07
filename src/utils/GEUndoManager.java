@@ -5,82 +5,93 @@ import java.util.ArrayList;
 import shapes.GEShape;
 
 public class GEUndoManager {
+//	private static int limit = 100; // undo, redo ÃÖ´ñ°ª ¼³Á¤
 	private ArrayList<ArrayList<GEShape>> shapeList;
-//	private boolean undostatus = false;
+//	private boolean undostatus;
 //	private boolean redostatus = false;
-	private int number;
+	private int shapeListNum;
 	
 	public GEUndoManager() {
 		shapeList = new ArrayList<ArrayList<GEShape>>();
-		number = 0;
-	}
-	
-	public void init() {
-		shapeList.clear();
-	}
-	
-	public ArrayList<GEShape> undo(){
-		if(number - 1 < 0){
-			System.out.println("undo error");
-			return new ArrayList<GEShape>();
-		}
-		number = number - 1;
-		if(number == 0){
-			return new ArrayList<GEShape>();
-		}
-		else {
-			ArrayList<GEShape> temp = new ArrayList<GEShape>();
-			ArrayList<GEShape> base = shapeList.get(number - 1); 
-			for(int i =0; i<base.size(); i++){
-				temp.add(base.get(i));
-			}
-			return temp;
-		}
-	}
-	
-	public ArrayList<GEShape> redo(){
-		ArrayList<GEShape> temp = new ArrayList<GEShape>();
-		if(shapeList.size() < number+1){
-			System.out.println("redo error");
-			if(shapeList.size() == 0){
-				return new ArrayList<GEShape>();
-			}
-			else {
-				ArrayList<GEShape> base = shapeList.get(number - 1); 
-				for(int i =0; i<base.size(); i++){
-					temp.add(base.get(i));
-				}
-				return temp;
-			}
-		}
-		number = number+1;
-		ArrayList<GEShape> base = shapeList.get(number - 1); 
-		for(int i =0; i<base.size(); i++){
-			temp.add(base.get(i));
-		}
-		return temp;
-	}
-	
-	public void push(ArrayList<GEShape> shapeList) {
-		ArrayList<GEShape> temp = new ArrayList<GEShape>();
-		if(number < this.shapeList.size()){
-			for(int i = this.shapeList.size() -1; number <= i; i--){
-				this.shapeList.remove(i);
-			}
-		}
-		
-		for(int i =0; i<shapeList.size(); i++){
-			temp.add(shapeList.get(i));
-		}
-		this.shapeList.add(temp);
-		number++; 
+		shapeListNum = 0;
 	}
 	
 /*	public boolean canUndo() {
 		return undostatus;
 	}
-	
+
 	public boolean canRedo() {
 		return redostatus;
+	}
+	
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}*/
+	
+	public void clearList() {
+		shapeList.clear();
+	}
+	
+	public ArrayList<GEShape> undo(){
+		ArrayList<GEShape> tempList = new ArrayList<GEShape>();
+		
+		if(shapeListNum - 1 < 0){
+			System.out.println("Can't undo");
+			return tempList;
+		} else {
+			shapeListNum = shapeListNum - 1;
+		
+			if(shapeListNum == 0){
+				return tempList;
+			}
+			else {
+				ArrayList<GEShape> undoshapeList = shapeList.get(shapeListNum - 1); 
+				for(int i = 0; i<undoshapeList.size(); i++){
+					tempList.add(undoshapeList.get(i));
+				}
+				return tempList;
+			}
+		}
+	}
+	
+	public ArrayList<GEShape> redo(){
+		ArrayList<GEShape> tempList = new ArrayList<GEShape>();
+		
+		if(shapeList.size() < shapeListNum + 1){
+			System.out.println("Can't redo");
+			if(shapeList.size() == 0){
+				return tempList;
+			} else {
+				ArrayList<GEShape> redoshapeList = shapeList.get(shapeListNum - 1); 
+				for(int i =0; i<redoshapeList.size(); i++){
+					tempList.add(redoshapeList.get(i));
+				}
+				return tempList;
+			}
+		}
+		
+		shapeListNum = shapeListNum + 1 ;
+		
+		ArrayList<GEShape> redoshapeList = shapeList.get(shapeListNum - 1); 
+		for(int i = 0; i < redoshapeList.size(); i++){
+			tempList.add(redoshapeList.get(i));
+		}
+		return tempList;
+	}
+	
+	public void push(ArrayList<GEShape> shapeList) {
+		ArrayList<GEShape> tempList = new ArrayList<GEShape>();
+		if(shapeListNum < this.shapeList.size()){
+			for(int i = this.shapeList.size()-1; i >= shapeListNum; i--) {
+				this.shapeList.remove(i);
+			}
+		}
+		
+		for(int i = 0; i < shapeList.size(); i++){
+			tempList.add(shapeList.get(i));
+		}
+		this.shapeList.add(tempList);
+		
+		shapeListNum = shapeListNum + 1; 
+	}
 }
