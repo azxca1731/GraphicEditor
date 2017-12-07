@@ -25,5 +25,6 @@ public class GEMenuBar extends JMenuBar {
 	public void init(GeDrawingPanel drawingPanel) {
 		colorMenu.init(drawingPanel);
 		lineMenu.init(drawingPanel);
+		editMenu.init(drawingPanel);
 	}
 }

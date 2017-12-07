@@ -11,10 +11,10 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputAdapter;
+
 import constants.GeConstants;
 import constants.GeConstants.EAnchorTypes;
 import constants.GeConstants.EState;
-
 import shapes.GEPolygon;
 import shapes.GEShape;
 import transformer.GEDrawer;
@@ -22,6 +22,7 @@ import transformer.GEMover;
 import transformer.GEResizer;
 import transformer.GETransformer;
 import utils.GECursorManager;
+import utils.GEUndoManager;
 
 public class GeDrawingPanel extends JPanel {
 	private GEShape currentShape;
@@ -34,12 +35,15 @@ public class GeDrawingPanel extends JPanel {
 	private GECursorManager cursorManager;
 	private BasicStroke basicStroke;
 	
+	private GEUndoManager undoManager;
+	
 	public GeDrawingPanel() {	
 		super();
 		
 		shapeList=new ArrayList<>();
 		currentState=EState.Idle;
 		drawingHandler=new MouseDrawingHandler();
+		undoManager = new GEUndoManager();
 		
 		fillColor = GeConstants.DEFAULT_FILL_COLOR;
 		lineColor = GeConstants.DEFAULT_LINE_COLOR;
@@ -64,7 +68,8 @@ public class GeDrawingPanel extends JPanel {
 	
 	public void setStroke(BasicStroke basicStroke){
 		if(selectedShape != null) {
-			selectedShape.setBasicStroke(basicStroke);;
+			selectedShape.setBasicStroke(basicStroke);
+			undoManager.push(shapeList);
 			repaint();
 		}else {
 			this.basicStroke=basicStroke;
@@ -74,6 +79,7 @@ public class GeDrawingPanel extends JPanel {
 	public void setFillColor(Color fillColor) {
 		if(selectedShape != null) {
 			selectedShape.setFillColor(fillColor);
+			undoManager.push(shapeList);
 			repaint();
 		}else {
 			this.fillColor = fillColor;	
@@ -83,6 +89,7 @@ public class GeDrawingPanel extends JPanel {
 	public void setLineColor(Color lineColor) {
 		if(selectedShape != null) {
 			selectedShape.setLineColor(lineColor);
+			undoManager.push(shapeList);
 			repaint();
 		}else {
 			this.lineColor = lineColor;
@@ -106,6 +113,7 @@ public class GeDrawingPanel extends JPanel {
 	
 	private void finishDraw() {
 		shapeList.add(currentShape);
+		undoManager.push(shapeList);
 	}
 	
 	private GEShape onShape(Point p) {
@@ -122,6 +130,18 @@ public class GeDrawingPanel extends JPanel {
 		for(GEShape shape : shapeList) {
 			shape.setSelected(false);
 		}
+	}
+	
+	public void undo() {
+		shapeList = undoManager.undo();
+		selectedShape = null;
+		repaint();
+	}
+	
+	public void redo() {
+		shapeList = undoManager.redo();
+		selectedShape = null;
+		repaint();
 	}
 	
 	private class MouseDrawingHandler extends MouseInputAdapter{
