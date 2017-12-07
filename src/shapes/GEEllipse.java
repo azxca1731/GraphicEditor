@@ -1,6 +1,8 @@
 package shapes;
 
 import java.awt.Point;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 
 public class GEEllipse extends GEShape{
@@ -26,6 +28,17 @@ public class GEEllipse extends GEShape{
 	public GEShape clone() {
 		// TODO Auto-generated method stub
 		return new GEEllipse();
+	}
+
+	@Override
+	public GEShape deepCopy() {
+		// TODO Auto-generated method stub
+		AffineTransform affineTransform = new AffineTransform();
+		Shape newShape = affineTransform.createTransformedShape(myShape);
+		GEEllipse shape = new GEEllipse();
+		shape.setShape(newShape);
+		shape.setGraphicsAttributes(this);
+		return shape;
 	}
 	
 	

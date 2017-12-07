@@ -35,6 +35,7 @@ public class GeDrawingPanel extends JPanel {
 	private GECursorManager cursorManager;
 	private BasicStroke basicStroke;
 	
+	private GEClipBoard clipboard;
 	private GEUndoManager undoManager;
 	
 	public GeDrawingPanel() {	
@@ -43,6 +44,7 @@ public class GeDrawingPanel extends JPanel {
 		shapeList=new ArrayList<>();
 		currentState=EState.Idle;
 		drawingHandler=new MouseDrawingHandler();
+		clipboard = new GEClipBoard();
 		undoManager = new GEUndoManager();
 		
 		fillColor = GeConstants.DEFAULT_FILL_COLOR;
@@ -141,6 +143,32 @@ public class GeDrawingPanel extends JPanel {
 	public void redo() {
 		shapeList = undoManager.redo();
 		selectedShape = null;
+		repaint();
+	}
+	
+	public void ShapeDelete() {
+		for(int i = shapeList.size(); i > 0 ; i--){
+			GEShape shape = shapeList.get(i-1);
+			if(shape.isSelected()){
+				shape.setSelected(false);
+				shapeList.remove(shape);
+			}
+		}
+			repaint();
+	}
+	public void ShapeCut() {
+		clipboard.cut(shapeList);
+		repaint();
+	}
+	
+	public void ShapeCopy() {
+		clipboard.copy(shapeList);
+	}
+	
+	public void ShapePaste() {
+		for(GEShape shape: clipboard.paste()){
+			shapeList.add(shape.deepCopy());
+		}
 		repaint();
 	}
 	

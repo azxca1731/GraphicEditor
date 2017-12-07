@@ -39,6 +39,22 @@ public class GEMenuEdit extends JMenu {
 		drawingPanel.redo();
 	}
 	
+	public void delete() {
+		drawingPanel.ShapeDelete();
+	}
+	
+	public void cut() {
+		drawingPanel.ShapeCut();
+	}
+	
+	public void copy() {
+		drawingPanel.ShapeCopy();
+	}
+	
+	public void paste() {
+		drawingPanel.ShapePaste();
+	}
+	
 	private class EditMenuHandler implements ActionListener {
 
 		@Override
@@ -49,6 +65,18 @@ public class GEMenuEdit extends JMenu {
 				break;
 			case Redo :
 				redo();
+				break;
+			case 삭제 :
+				delete();
+				break;
+			case 잘라내기 :
+				cut();
+				break;
+			case 복사 :
+				copy();
+				break;
+			case 붙이기 :
+				paste();
 				break;
 			}
 		}

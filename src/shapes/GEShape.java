@@ -22,6 +22,10 @@ public abstract class GEShape {
 	protected AffineTransform affineTransform;
 	protected BasicStroke basicStroke;
 	
+	protected void setShape(Shape shape){
+		myShape = shape;
+	}
+	
 	public GEShape(Shape shape) {
 		this.myShape = shape;
 		anchorList = null;
@@ -91,15 +95,26 @@ public abstract class GEShape {
 		this.fillColor = fillColor;
 	}
 	
+	public Color getFillColor() {
+		return fillColor;
+	}
+	
 	public void setLineColor(Color lineColor) {
 		this.lineColor = lineColor;
 	}
+	
+	public Color getLineColor() {
+		return lineColor;
+	}
+	
 	public void setBasicStroke(BasicStroke basicStroke) {
 		this.basicStroke = basicStroke;
 	}
+	
 	public BasicStroke getBasicStroke() {
 		return basicStroke;
 	}
+	
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 		if(selected == true) {
@@ -120,9 +135,23 @@ public abstract class GEShape {
 		return myShape.intersects(new Rectangle(p.x , p.y , 2 ,2));
 	}
 	
+	public void setAnchorList(GEAnchorList anchorList){
+		this.anchorList = anchorList;
+	}
+	
+	public void setGraphicsAttributes(GEShape shape){
+		setBasicStroke(shape.getBasicStroke());
+		setAnchorList(shape.getAnchorList());
+		setAnchorList(shape.getAnchorList());
+		setSelected(shape.isSelected());
+		setFillColor(shape.getFillColor());
+		setLineColor(shape.getLineColor());
+		
+	}
 	
 	public abstract void initDraw(Point startP);
 	public abstract void setCoordinate(Point currentP);
 	public abstract GEShape clone();
+	public abstract GEShape deepCopy();
 	
 }
