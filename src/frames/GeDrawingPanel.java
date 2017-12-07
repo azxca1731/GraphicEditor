@@ -163,12 +163,14 @@ public class GeDrawingPanel extends JPanel {
 	
 	public void ShapeCopy() {
 		clipboard.copy(shapeList);
+		undoManager.push(shapeList);
 	}
 	
 	public void ShapePaste() {
 		for(GEShape shape: clipboard.paste()){
 			shapeList.add(shape.deepCopy());
 		}
+		undoManager.push(shapeList);
 		repaint();
 	}
 	
@@ -177,6 +179,9 @@ public class GeDrawingPanel extends JPanel {
 		public void mouseDragged(MouseEvent e) {
 			if(currentState != EState.Idle) {
 				transformer.transformer((Graphics2D)getGraphics(), e.getPoint());
+				if(transformer instanceof GEMover){
+					((GEMover)transformer).setMove(true);
+				}
 			}
 		}
 
@@ -221,6 +226,11 @@ public class GeDrawingPanel extends JPanel {
 				return;
 			}else if(currentState == EState.Resizing) {
 				((GEResizer)transformer).finalize(e.getPoint());
+				undoManager.push(shapeList);
+			}else if(currentState == EState.Moving) {
+				if(((GEMover)transformer).isMoved()){
+					undoManager.push(shapeList);
+				}
 			}
 			currentState = EState.Idle;
 			repaint();
@@ -256,10 +266,5 @@ public class GeDrawingPanel extends JPanel {
 				}
 			}
 		}
-		
-		
-		
 	}
-
-	
 }

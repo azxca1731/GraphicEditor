@@ -47,7 +47,7 @@ public class GEUndoManager {
 			else {
 				ArrayList<GEShape> undoshapeList = shapeList.get(shapeListNum - 1); 
 				for(int i = 0; i<undoshapeList.size(); i++){
-					tempList.add(undoshapeList.get(i));
+					tempList.add(undoshapeList.get(i).deepCopy());
 				}
 				return tempList;
 			}
@@ -64,7 +64,7 @@ public class GEUndoManager {
 			} else {
 				ArrayList<GEShape> redoshapeList = shapeList.get(shapeListNum - 1); 
 				for(int i =0; i<redoshapeList.size(); i++){
-					tempList.add(redoshapeList.get(i));
+					tempList.add(redoshapeList.get(i).deepCopy());
 				}
 				return tempList;
 			}
@@ -74,7 +74,7 @@ public class GEUndoManager {
 		
 		ArrayList<GEShape> redoshapeList = shapeList.get(shapeListNum - 1); 
 		for(int i = 0; i < redoshapeList.size(); i++){
-			tempList.add(redoshapeList.get(i));
+			tempList.add(redoshapeList.get(i).deepCopy());
 		}
 		return tempList;
 	}
@@ -88,7 +88,7 @@ public class GEUndoManager {
 		}
 		
 		for(int i = 0; i < shapeList.size(); i++){
-			tempList.add(shapeList.get(i));
+			tempList.add(shapeList.get(i).deepCopy());
 		}
 		this.shapeList.add(tempList);
 		
