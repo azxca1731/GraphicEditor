@@ -8,12 +8,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 import javax.swing.JToolBar;
 
-import constants.GeConstants;
-import constants.GeConstants.EToolBarButtons;
+import constants.GEConstants;
+import constants.GEConstants.EToolBarButtons;
 import shapes.GEEllipse;
 import shapes.GELine;
 import shapes.GEPolygon;
 import shapes.GERectangle;
+import shapes.GESelect;
 
 public class GEToolbar extends JToolBar {
 	private GeDrawingPanel drawingPanel;
@@ -29,8 +30,8 @@ public class GEToolbar extends JToolBar {
 		
 		for(EToolBarButtons btn : EToolBarButtons.values()) {
 			rButton= new JRadioButton();
-			rButton.setIcon(new ImageIcon(GeConstants.IMG_URL+btn.toString()+GeConstants.TOOLBAR_BTN));
-			rButton.setSelectedIcon(new ImageIcon(GeConstants.IMG_URL+btn.toString()+GeConstants.TOOLBAR_BTN_SLT));
+			rButton.setIcon(new ImageIcon(GEConstants.IMG_URL+btn.toString()+GEConstants.TOOLBAR_BTN));
+			rButton.setSelectedIcon(new ImageIcon(GEConstants.IMG_URL+btn.toString()+GEConstants.TOOLBAR_BTN_SLT));
 			rButton.addActionListener(toolbarHandler);
 			rButton.setActionCommand(btn.toString());
 			this.add(rButton);
@@ -63,7 +64,7 @@ public class GEToolbar extends JToolBar {
 			}else if(rButton.getActionCommand().equals(EToolBarButtons.Polygon.name())) {
 				drawingPanel.setCurrentShape(new GEPolygon());
 			}else if(rButton.getActionCommand().equals(EToolBarButtons.Select.name())) {
-				drawingPanel.setCurrentShape(null);
+				drawingPanel.setCurrentShape(new GESelect());
 			}
 		}
 	}

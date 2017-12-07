@@ -8,8 +8,8 @@ import javax.swing.JColorChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import constants.GeConstants;
-import constants.GeConstants.EColorMenuItems;
+import constants.GEConstants;
+import constants.GEConstants.EColorMenuItems;
 import frames.GeDrawingPanel;
 
 public class GEMenuColor extends JMenu {
@@ -35,22 +35,22 @@ public class GEMenuColor extends JMenu {
 	
 	public void setLineColor() {
 		Color lineColor = JColorChooser.showDialog(
-				null, GeConstants.TITLE_LINECOLOR, null);
+				null, GEConstants.TITLE_LINECOLOR, null);
 		drawingPanel.setLineColor(lineColor);
 	}
 	
 	public void setFillColor() {
 		Color fillColor = JColorChooser.showDialog(
-				null, GeConstants.TITLE_FILLCOLOR, null);
+				null, GEConstants.TITLE_FILLCOLOR, null);
 		drawingPanel.setFillColor(fillColor);
 	}
 	
 	public void clearLineColor() {
-		drawingPanel.setLineColor(GeConstants.DEFAULT_LINE_COLOR);
+		drawingPanel.setLineColor(GEConstants.DEFAULT_LINE_COLOR);
 	}
 	
 	public void clearFillColor() {
-		drawingPanel.setFillColor(GeConstants.DEFAULT_FILL_COLOR);
+		drawingPanel.setFillColor(GEConstants.DEFAULT_FILL_COLOR);
 	}
 	
 	private class ColorMenuHandler implements ActionListener{

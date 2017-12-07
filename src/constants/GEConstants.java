@@ -2,7 +2,7 @@ package constants;
 
 import java.awt.Color;
 
-public class GeConstants {
+public class GEConstants {
 	//GEMainFrame
 	public static final int WIDTH_MAINFRAME = 400;
 	public static final int HEIGHT_MAINFRAME = 600;
@@ -29,7 +29,7 @@ public class GeConstants {
 	//GEDrawingPanel
 	public static final Color FOREGROUND_COLOR=Color.BLACK;
 	public static final Color BACKGROUND_COLOR=Color.WHITE;
-	public static enum EState {Idle , TwoPointsDrawing, NPointsDrawing, Moving, Resizing};
+	public static enum EState {Idle , TwoPointsDrawing, NPointsDrawing, Moving, Resizing, Selecting};
 	
 	public static final Color DEFAULT_LINE_COLOR = Color.BLACK;
 	public static final Color DEFAULT_FILL_COLOR = Color.WHITE;

@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
-import constants.GeConstants.EAnchorTypes;
+import constants.GEConstants.EAnchorTypes;
 import shapes.GEShape;
 
 public class GEResizer extends GETransformer {

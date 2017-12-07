@@ -9,7 +9,7 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
-import constants.GeConstants.EAnchorTypes;
+import constants.GEConstants.EAnchorTypes;
 import utils.GEAnchorList;
 
 public abstract class GEShape {
@@ -147,6 +147,25 @@ public abstract class GEShape {
 		setFillColor(shape.getFillColor());
 		setLineColor(shape.getLineColor());
 		
+	}
+	
+	//원점 이동을 위한 메소드 moveReverse, move
+	public void moveReverse(Point2D resizeAnchor){
+		affineTransform.setToTranslation(-resizeAnchor.getX(), -resizeAnchor.getY());
+		myShape = affineTransform.createTransformedShape(myShape);
+	}
+	
+	public void move(Point2D resizeAnchor){
+		affineTransform.setToTranslation(resizeAnchor.getX(), resizeAnchor.getY());
+		myShape = affineTransform.createTransformedShape(myShape);
+	}
+	
+	public void setMyShape(Shape myShape) {
+		this.myShape = myShape;
+	}
+	
+	public Shape getMyShape() {
+		return myShape;
 	}
 	
 	public abstract void initDraw(Point startP);

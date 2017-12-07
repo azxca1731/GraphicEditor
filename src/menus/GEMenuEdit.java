@@ -6,8 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import constants.GeConstants.EEditMenuItems;
+import constants.GEConstants.EEditMenuItems;
 import frames.GeDrawingPanel;
+import shapes.GEGroup;
 
 public class GEMenuEdit extends JMenu {
 	
@@ -54,30 +55,27 @@ public class GEMenuEdit extends JMenu {
 	public void paste() {
 		drawingPanel.ShapePaste();
 	}
+	public void group() {
+		drawingPanel.group(new GEGroup());
+	}
+	
+	public void ungroup() {
+		drawingPanel.unGroup();
+	}
 	
 	private class EditMenuHandler implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			switch(EEditMenuItems.valueOf(e.getActionCommand()) ) {
-			case Undo :
-				undo();
-				break;
-			case Redo :
-				redo();
-				break;
-			case 삭제 :
-				delete();
-				break;
-			case 잘라내기 :
-				cut();
-				break;
-			case 복사 :
-				copy();
-				break;
-			case 붙이기 :
-				paste();
-				break;
+			case Undo :undo();break;
+			case Redo :redo();break;
+			case 삭제 :delete();break;
+			case 잘라내기 :cut();break;
+			case 복사 :copy();break;
+			case 붙이기 :paste();break;
+			case Group:group();break;
+			case Ungroup:ungroup();break;
 			}
 		}
 		

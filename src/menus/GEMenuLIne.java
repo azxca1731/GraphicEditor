@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import constants.GeConstants;
-import constants.GeConstants.EColorMenuItems;
-import constants.GeConstants.ELineMenuItems;
+import constants.GEConstants;
+import constants.GEConstants.EColorMenuItems;
+import constants.GEConstants.ELineMenuItems;
 import frames.GeDrawingPanel;
 
 public class GEMenuLIne extends JMenu{
@@ -31,34 +31,34 @@ public class GEMenuLIne extends JMenu{
 	}
 	
 	public void setSolidStroke() {
-		drawingPanel.setStroke(new BasicStroke(GeConstants.DEFAULT_LINE_WIDTH));
+		drawingPanel.setStroke(new BasicStroke(GEConstants.DEFAULT_LINE_WIDTH));
 	}
 	
 	public void setDottedStroke() {
 
-		float dashes[] = {GeConstants.DEFAULT_DASH_OFFSET};
+		float dashes[] = {GEConstants.DEFAULT_DASH_OFFSET};
 		drawingPanel.setStroke(new BasicStroke(
-				GeConstants.DEFAULT_LINE_WIDTH,
+				GEConstants.DEFAULT_LINE_WIDTH,
 				BasicStroke.CAP_BUTT,
 				BasicStroke.JOIN_BEVEL, 10, dashes, 0));
 	}
 	public void setRoundStroke() {
 		drawingPanel.setStroke(new BasicStroke(
-				GeConstants.DEFAULT_LINE_WIDTH,
+				GEConstants.DEFAULT_LINE_WIDTH,
 				BasicStroke.CAP_ROUND,
 				BasicStroke.JOIN_ROUND));
 	}
 	public void setEdgeStroke() {
 		drawingPanel.setStroke(new BasicStroke(
-				GeConstants.DEFAULT_LINE_WIDTH,
+				GEConstants.DEFAULT_LINE_WIDTH,
 				BasicStroke.CAP_BUTT,
 				BasicStroke.JOIN_MITER));
 	}
 	public void setBoldStroke() {
-		drawingPanel.setStroke(new BasicStroke(GeConstants.DEFAULT_BOLDLINE_WIDTH));
+		drawingPanel.setStroke(new BasicStroke(GEConstants.DEFAULT_BOLDLINE_WIDTH));
 	}
 	public void setFineStroke() {
-		drawingPanel.setStroke(new BasicStroke(GeConstants.DEFAULT_FINELINE_WIDTH));
+		drawingPanel.setStroke(new BasicStroke(GEConstants.DEFAULT_FINELINE_WIDTH));
 	}
 private class LineMenuHandler implements ActionListener{
 		

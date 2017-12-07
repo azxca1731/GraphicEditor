@@ -7,13 +7,13 @@ import java.awt.HeadlessException;
 import javax.swing.JFrame;
 import javax.swing.border.Border;
 
-import constants.GeConstants;
+import constants.GEConstants;
 import menus.GEMenuBar;
 
 public class GeMainFrame extends JFrame {
 	//Singletern 패턴
 	private static GeMainFrame uniqueMainFrame = 
-			new GeMainFrame(GeConstants.TITLE_MAINFFRAME);
+			new GeMainFrame(GEConstants.TITLE_MAINFFRAME);
 	private GeDrawingPanel drawingPanel;
 	private GEMenuBar menuBar;
 	private GEToolbar toolBar;
@@ -22,7 +22,7 @@ public class GeMainFrame extends JFrame {
 		super(title);
 		drawingPanel= new GeDrawingPanel();
 		menuBar = new GEMenuBar();
-		toolBar = new GEToolbar(GeConstants.TITLE_TOOLBAR);
+		toolBar = new GEToolbar(GEConstants.TITLE_TOOLBAR);
 		
 		this.setJMenuBar(menuBar);
 		this.add(drawingPanel);
@@ -37,7 +37,7 @@ public class GeMainFrame extends JFrame {
 		toolBar.init(drawingPanel);
 		menuBar.init(drawingPanel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(GeConstants.WIDTH_MAINFRAME,GeConstants.HEIGHT_MAINFRAME);
+		this.setSize(GEConstants.WIDTH_MAINFRAME,GEConstants.HEIGHT_MAINFRAME);
 		this.setVisible(true);
 	}
 

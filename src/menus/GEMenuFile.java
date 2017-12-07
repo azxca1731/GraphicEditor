@@ -4,7 +4,7 @@ import javax.swing.Action;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import constants.GeConstants.EFileMenuItems;
+import constants.GEConstants.EFileMenuItems;
 
 public class GEMenuFile extends JMenu {
 
